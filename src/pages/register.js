@@ -1,8 +1,8 @@
 import * as React from "react";
-import Dashboard from "./Dashboard";
-import Form from "../Components/Form";
-import Room from "../Components/Room";
-// markup
+
+import Dashboard from "../Components/Dashboard";
+import Form from "../Components/RegisterForm";
+
 const Register = () => {
   return (
     <Dashboard>
