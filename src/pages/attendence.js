@@ -213,10 +213,10 @@ function Row(props) {
                     return (
                       <TableRow key={i}>
                         <TableCell component="th" scope="row">
-                          {x[0]}
+                          {x.name}
                         </TableCell>
                         <TableCell component="th" scope="row">
-                          {x[1]}
+                          {x.reg}
                         </TableCell>
                       </TableRow>
                     );
