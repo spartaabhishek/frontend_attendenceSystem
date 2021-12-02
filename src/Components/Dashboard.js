@@ -1,5 +1,5 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -7,16 +7,15 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Form from "../Components/Form";
-import Room from "../Components/Room";
+
 import { Link } from "gatsby";
 const drawerWidth = 240;
 
@@ -33,32 +32,43 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        <Link to="/Register" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/register" style={{ textDecoration: "none", color: "black" }}>
           <ListItem button>
             <ListItemIcon>
-              <InboxIcon />
+              <ArrowRightIcon />
             </ListItemIcon>
             <ListItemText primary="Register" />
           </ListItem>
         </Link>
         <Link
-          to="/CreateRoom"
+          to="/attendee"
           style={{ textDecoration: "none", color: "black" }}
         >
           <ListItem button>
             <ListItemIcon>
-              <InboxIcon />
+              <ArrowRightIcon />
             </ListItemIcon>
-            <ListItemText primary="CreateRoom" />
+            <ListItemText primary="Attendee List" />
           </ListItem>
         </Link>
         <Link
-          to="/Attendence"
+          to="/createRoom"
           style={{ textDecoration: "none", color: "black" }}
         >
           <ListItem button>
             <ListItemIcon>
-              <InboxIcon />
+              <ArrowRightIcon />
+            </ListItemIcon>
+            <ListItemText primary="Create Room" />
+          </ListItem>
+        </Link>
+        <Link
+          to="/attendence"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <ArrowRightIcon />
             </ListItemIcon>
             <ListItemText primary="Attendence" />
           </ListItem>
@@ -146,14 +156,6 @@ function ResponsiveDrawer(props) {
       </Box>
     </Box>
   );
+
 }
-
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
-
 export default ResponsiveDrawer;
