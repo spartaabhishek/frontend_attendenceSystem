@@ -25,7 +25,7 @@ const IndexPage = () => {
         username
       })
       .then((res) => {
-        authContext.updateAuthContext(res.data.msg.login_id)
+        if (res.data.status=="success") authContext.updateAuthContext(res.data.msg.login_id)
         setPwd("");
         setUsername("");
       })

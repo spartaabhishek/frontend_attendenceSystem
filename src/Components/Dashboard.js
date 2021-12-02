@@ -70,7 +70,7 @@ function ResponsiveDrawer(props) {
             <ListItemIcon>
               <ArrowRightIcon />
             </ListItemIcon>
-            <ListItemText primary="Attendence" />
+            <ListItemText primary="Attendance" />
           </ListItem>
         </Link>
       </List>

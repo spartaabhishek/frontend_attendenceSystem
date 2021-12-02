@@ -15,12 +15,14 @@ import TextField from "@mui/material/TextField";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Modal from "@mui/material/Modal";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 import CreateCsv from "../Components/CreateCsv";
 import Dashboard from "../Components/Dashboard";
 import axios from "axios";
 
 import { AuthContext } from "../Provider/AuthManager";
+import { navigate } from "gatsby";
 
 function AddAttendeeModal({ open, handleClose, roomId }) {
   const [email, setEmail] = useState("");
@@ -120,7 +122,7 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
-  console.log(row)
+  
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -233,22 +235,32 @@ function Row(props) {
 
 export default function CollapsibleTable() {
   const [data, setData] = React.useState([]);
+  const [refresh, setRefresh] = React.useState(true);
   const authContext = React.useContext(AuthContext);
-  console.log(authContext);
 
   useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/room/get", {
-        login_id: authContext.login_id,
-      })
-      .then((response) => {
-        setData(response.data.msg);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    if (refresh && authContext.isLoggedIn) {
+      setRefresh(false);
+      axios
+        .post("http://localhost:5000/api/room/get", {
+          login_id: authContext.login_id,
+        })
+        .then((response) => {
+          setData(response.data.msg);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [refresh]);
 
   return (
     <Dashboard>
+      {authContext.isLoggedIn ? (
+      <>
+      <div>
+        <Button variant="contained" onClick={() => setRefresh(true)}>
+          <RefreshIcon />
+        </Button>
+      </div>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <TableHead>
@@ -266,6 +278,10 @@ export default function CollapsibleTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      </>
+      ) 
+      : navigate("/")
+      }
     </Dashboard>
   );
 }

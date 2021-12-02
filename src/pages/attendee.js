@@ -11,48 +11,55 @@ import Dashboard from "../Components/Dashboard";
 import axios from "axios";
 
 import { AuthContext } from "../Provider/AuthManager";
+import { navigate } from "gatsby";
 
-export default function AttendeeTable() {
+export default function AttendeeTable({ location }) {
   const [data, setData] = React.useState([]);
   const authContext = React.useContext(AuthContext);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/user/get")
-      .then((response) => {
-        setData(response.data.msg);
-      })
-      .catch((err) => console.log(err));
+    if (authContext.isLoggedIn) {
+      axios
+        .get("http://localhost:5000/api/user/get")
+        .then((response) => {
+          setData(response.data.msg);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
     <Dashboard>
-      <TableContainer component={Paper}>
-        <Table aria-label="table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Registration Number</TableCell>
-              <TableCell>Email</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row, i) => (
-              <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.reg}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.email}
-                </TableCell>
+      {authContext.isLoggedIn ? (
+        <TableContainer component={Paper}>
+          <Table aria-label="table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Registration Number</TableCell>
+                <TableCell>Email</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {data.map((row, i) => (
+                <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.reg}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.email}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        navigate("/")
+      )}
     </Dashboard>
   );
 }
