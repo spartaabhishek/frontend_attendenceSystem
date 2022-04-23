@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -40,10 +40,7 @@ function ResponsiveDrawer(props) {
             <ListItemText primary="Register" />
           </ListItem>
         </Link>
-        <Link
-          to="/attendee"
-          style={{ textDecoration: "none", color: "black" }}
-        >
+        <Link to="/attendee" style={{ textDecoration: "none", color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <ArrowRightIcon />
@@ -71,6 +68,17 @@ function ResponsiveDrawer(props) {
               <ArrowRightIcon />
             </ListItemIcon>
             <ListItemText primary="Attendence" />
+          </ListItem>
+        </Link>
+        <Link
+          to="/analytics"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <ArrowRightIcon />
+            </ListItemIcon>
+            <ListItemText primary="Analytics" />
           </ListItem>
         </Link>
       </List>
@@ -156,6 +164,5 @@ function ResponsiveDrawer(props) {
       </Box>
     </Box>
   );
-
 }
 export default ResponsiveDrawer;
